@@ -1,0 +1,27 @@
+{% extends '../base.html' %}
+{% block body %}
+<div class="container shortcut">
+    {% if shortcut %}
+    <div class="alert alert-dismissible alert-secondary">
+        <h1>{{ shortcut.get_link_url }}</h1>
+    </div>
+    {% endif %}
+    <form class="form-shortener" action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group {% if form.errors %}has-danger{% endif %}{% if shortcut %}has-success{% endif %}">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">URL</span>
+                </div>
+                {{ form.url }}
+                {% if form.url.errors %}
+                {% for error in form.url.errors %}
+                <div class="invalid-feedback" style="width: 100%;">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Generuj skrót</button>
+    </form>
+</div>
+{% endblock body %}

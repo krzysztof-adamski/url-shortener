@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+psycopg2-binary = "*"
+gunicorn = "==20.0.4"
+
+[dev-packages]
+black = "==19.3b0"
+coverage = "*"
+ipdb = "*"
+isort = "*"
+pre-commit = "*"
+mypy = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+server = "python manage.py runserver 0:8000"
+tests = "coverage run manage.py test"
+report = "coverage report -m"
+html = "coverage html"
