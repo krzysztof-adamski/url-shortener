@@ -1,6 +1,7 @@
-from django.test import TestCase
-from shortener.models import Shortcut
 from django.conf import settings
+from django.test import TestCase
+
+from shortener.models import Shortcut
 
 
 class ShortcutModelTests(TestCase):
