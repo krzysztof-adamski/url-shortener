@@ -10,22 +10,25 @@ from .utils import generate_link
 class ShortcutForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['url'].widget.attrs["required"] = "required"
-        self.fields['url'].widget.attrs.update(
+        self.fields["url"].widget.attrs["required"] = "required"
+        self.fields["url"].widget.attrs.update(
             {
                 "class": "form-control form-control-lg",
                 "placeholder": "`http://...`  `https://...`",
                 "pattern": _("https://.*|http://.*"),
-                "width": "50%"
+                "width": "50%",
             }
         )
+
     class Meta:
         model = Shortcut
-        fields = ('url',)
+        fields = ("url",)
 
     def _update_css_class(self, css_class):
-        css_classes = self.fields['url'].widget.attrs['class']
-        self.fields['url'].widget.attrs.update({"class": f"{css_classes} {css_class}"})
+        css_classes = self.fields["url"].widget.attrs["class"]
+        self.fields["url"].widget.attrs.update(
+            {"class": f"{css_classes} {css_class}"}
+        )
 
     def clean_url(self):
         cleaned_data = super(ShortcutForm, self).clean()
