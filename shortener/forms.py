@@ -4,7 +4,7 @@ from django.core.validators import URLValidator
 from django.utils.translation import gettext_lazy as _
 
 from .models import Shortcut
-from .utils import generate_link
+from .utils import get_link
 
 
 class ShortcutForm(forms.ModelForm):
@@ -42,7 +42,10 @@ class ShortcutForm(forms.ModelForm):
 
     def save(self, commit=True):
         shortcut = super(ShortcutForm, self).save(commit=False)
-        shortcut.link = generate_link()
+        try:
+            shortcut.link = get_link()
+        except RecursionError:
+            raise
         try:
             shortcut = Shortcut.objects.get(url=shortcut.url)
         except Shortcut.DoesNotExist:
