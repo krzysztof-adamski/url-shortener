@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = os.environ.get("DEBUG", False)
 
 DOMAIN = os.getenv("DOMAIN", "localhost")
 PORT = os.getenv("PORT", 80)
