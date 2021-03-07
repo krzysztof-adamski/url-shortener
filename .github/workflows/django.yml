@@ -32,11 +32,11 @@ jobs:
   deploy:
     name: Deploy Stage
     needs: test
-      if: always()
     runs-on: ubuntu-latest
 
     steps:
     - name: Deploy app to DigitalOcean
+      if: always()
       uses: appleboy/ssh-action@v0.1.2
       with:
         host: ${{secrets.DIGITALOCEAN_HOST}}
