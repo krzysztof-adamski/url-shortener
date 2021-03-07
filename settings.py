@@ -31,7 +31,7 @@ PORT = os.getenv("PORT", 80)
 SHORTCUT_LENGHT = 8
 MAX_URL_LENGHT = 2048
 EXTRA_CHARS = 4
-SCHEME = "https"
+SCHEME = os.getenv("SCHEME", "https")
 BASE_URL = f"{SCHEME}://{DOMAIN}:{PORT}"
 URL_LENGHT = MAX_URL_LENGHT - len(f"{BASE_URL}/") + EXTRA_CHARS
 
