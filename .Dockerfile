@@ -22,4 +22,4 @@ RUN pip install -r requirements.txt
 
 COPY . /opt/service
 
-RUN rm /opt/service/local_settings.py
+RUN rm -f /opt/service/local_settings.py
