@@ -29,11 +29,10 @@ jobs:
     - name: Run Tests
       run: |
         pipenv run tests
-
   deploy:
     name: Deploy Stage
+    needs: test
       if: always()
-      needs: test
     runs-on: ubuntu-latest
 
     steps:
