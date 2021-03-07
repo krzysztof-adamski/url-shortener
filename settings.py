@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "781q3w(23ih_sz0gqgeq0s!w3kwqi59%@6@6*(=p66f=apb^%%"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
 DOMAIN = os.getenv("DOMAIN", "localhost")
 PORT = os.getenv("PORT", 80)
@@ -33,7 +33,8 @@ EXTRA_CHARS = 4
 SCHEME = "https"
 BASE_URL = f"{SCHEME}://{DOMAIN}:{PORT}"
 URL_LENGHT = MAX_URL_LENGHT - len(f"{BASE_URL}/") + EXTRA_CHARS
-ALLOWED_HOSTS = [DOMAIN]
+
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", DOMAIN).split(" ")
 
 # Application definition
 
@@ -81,10 +82,17 @@ WSGI_APPLICATION = "wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get(
+            "SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")
+        ),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
 
@@ -123,9 +131,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static_media/")
+STATIC_ROOT = "/static"
 STATIC_URL = "/static/"
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static/"),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static/"),)
 
 
 try:

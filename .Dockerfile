@@ -1,6 +1,10 @@
 FROM python:3.8.6
+
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONPATH=/opt/service
+
+WORKDIR /opt/service
 
 RUN apt update && apt install -y python3-dev vim
 
@@ -18,5 +22,4 @@ RUN pip install -r requirements.txt
 
 COPY . /opt/service
 
-
-WORKDIR /opt/service
+RUN rm /opt/service/local_settings.py
