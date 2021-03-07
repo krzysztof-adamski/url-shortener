@@ -1,4 +1,4 @@
-name: Django CI
+name: Application CI/CD
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  test:
+    name: Test Stage
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 2
@@ -29,11 +29,13 @@ jobs:
     - name: Run Tests
       run: |
         pipenv run tests
-  
-  deploy:
 
+  deploy:
+    name: Deploy Stage
+      if: always()
+      needs: test
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Deploy app to DigitalOcean
       uses: appleboy/ssh-action@v0.1.2
@@ -41,7 +43,7 @@ jobs:
         host: ${{secrets.DIGITALOCEAN_HOST}}
         key: ${{secrets.DIGITALOCEAN_KEY}}
         username: ${{secrets.DIGITALOCEAN_USER}}
-        
+
         script: |
           cd /root/apps
           cd url-shortener
@@ -49,7 +51,8 @@ jobs:
           git fetch
           git checkout master
           git pull origin master
-          docker-compose up -d --build shortener
+          make stop
+          make start-build
           echo 'Application Updated Successfull'
 
 
