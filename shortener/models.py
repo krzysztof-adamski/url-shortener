@@ -22,9 +22,10 @@ class Shortcut(models.Model):
         return self.url
 
     def get_absolute_url(self):
-        return reverse("shortcut_detail", args=[self.link])
+        reverse_url = reverse("shortcut_detail", args=[self.link])
+        return f"{settings.BASE_URL}{reverse_url}"
 
     @property
     def get_link_url(self):
-        url = f"{settings.BASE_URL}{self.get_absolute_url()}"
+        url = self.get_absolute_url()
         return url if not url.endswith("/") else url[:-1]
