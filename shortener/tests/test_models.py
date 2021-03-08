@@ -23,7 +23,9 @@ class ShortcutModelTests(TestCase):
     def test_shortcut_absolute_url(self):
         """Shortcut object absolute url."""
         shortcut = Shortcut.objects.get(url=self.url)
-        self.assertEqual(shortcut.get_absolute_url(), f"/{self.link}/")
+        self.assertEqual(
+            shortcut.get_absolute_url(), f"{settings.BASE_URL}/{self.link}/"
+        )
 
     def test_shortcut_link_url(self):
         """Shortcut object link url."""

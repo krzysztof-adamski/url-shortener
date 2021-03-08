@@ -24,7 +24,7 @@ class IndexViewsTests(TestCase):
         shortcut = self.shortcut
         response = self.client.get(f"/{shortcut.link}")
         self.assertEqual(response.status_code, 301)
-        self.assertEqual(response.url, f"{shortcut.get_absolute_url()}")
+        self.assertEqual(response.url, f"/{shortcut.link}/")
 
     def test_should_302_redirect_to_external_url(self):
         shortcut = self.shortcut
