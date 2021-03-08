@@ -1,5 +1,8 @@
 # url-shortener
 
-http://46.101.35.61:5000/
+http://shortener.adamski.work
 
-http://46.101.35.61:5000/admin
+http://shortener.adamski.work/admin
+
+login: ************
+password: *****
