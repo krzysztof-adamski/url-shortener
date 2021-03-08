@@ -33,11 +33,13 @@ MAX_URL_LENGHT = 2048
 EXTRA_CHARS = 4
 SCHEME = os.getenv("SCHEME", "https")
 BASE_URL = (
-    f"{SCHEME}://{DOMAIN}:{PORT}" if PORT != 80 else f"{SCHEME}://{DOMAIN}"
+    f"{SCHEME}://{DOMAIN}:{PORT}"
+    if int(PORT) != 80
+    else f"{SCHEME}://{DOMAIN}"
 )
 URL_LENGHT = MAX_URL_LENGHT - len(f"{BASE_URL}/") + EXTRA_CHARS
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", DOMAIN).split(" ")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
