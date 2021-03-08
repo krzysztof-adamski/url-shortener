@@ -39,7 +39,7 @@ BASE_URL = (
 )
 URL_LENGHT = MAX_URL_LENGHT - len(f"{BASE_URL}/") + EXTRA_CHARS
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split(" ")
 
 # Application definition
 
