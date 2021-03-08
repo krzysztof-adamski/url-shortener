@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
 DOMAIN = os.getenv("DOMAIN", "localhost")
-PORT = os.getenv("PORT")
+PORT = os.getenv("PORT", 5000)
 SHORTCUT_LENGHT = 8
 MAX_URL_LENGHT = 2048
 EXTRA_CHARS = 4
