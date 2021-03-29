@@ -16,7 +16,9 @@ jobs:
         DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
         DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
         DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
-    - name: Test printing your secret (Remove this step in production)
+    - name: Test printing DIGITALOCEAN_HOST
       run: cat $HOME/secrets/dghost.json
+    - name: Test printing DIGITALOCEAN_KEY
       run: cat $HOME/secrets/dgkey.json
+    - name: Test printing DIGITALOCEAN_USER
       run: cat $HOME/secrets/dguser.json
