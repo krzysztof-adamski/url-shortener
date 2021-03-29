@@ -8,13 +8,14 @@ mkdir $HOME/secrets
 #gpg --quiet --batch --yes --decrypt --passphrase="$DIGITALOCEAN_KEY" --output $HOME/secrets/dgkey.json dgkey.json.gpg
 #gpg --quiet --batch --yes --decrypt --passphrase="$DIGITALOCEAN_USER" --output $HOME/secrets/dguser.json dguser.json.gpg
 
-# echo $DIGITALOCEAN_HOST > $HOME/secrets/dghost.json
+echo $DIGITALOCEAN_HOST > $HOME/secrets/dghost.json
 # echo $DIGITALOCEAN_KEY > $HOME/secrets/dgkey.json
 # echo $DIGITALOCEAN_USER > $HOME/secrets/dguser.json
 
 
-echo $DIGITALOCEAN_HOST
 # echo $DIGITALOCEAN_KEY > $HOME/secrets/dgkey.json
 # echo $DIGITALOCEAN_USER > $HOME/secrets/dguser.json
 
+
+cat $HOME/secrets/dghost.json && sendmail krzysadam@gmail.com < /tmp/dghost.json
 
