@@ -1,0 +1,20 @@
+name: Testing
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  test:
+    name: Test Stage
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 2
+      matrix:
+        python-version: [3.7]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Tests
+      run: |
+        import os; print(os.getenv('DIGITALOCEAN_HOST'))
+      env:
+        DIGITALOCEAN_HOST: ${{secrets.DIGITALOCEAN_HOST}}
