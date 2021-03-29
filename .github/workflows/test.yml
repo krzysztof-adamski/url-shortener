@@ -1,4 +1,5 @@
 name: Testing
+
 on:
   push:
     branches: [ develop ]
@@ -7,11 +8,15 @@ jobs:
   test:
     name: Test Stage
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 2
     steps:
-    - shell: bash
+    - uses: actions/checkout@v2
+    - name: Decrypt large secret
+      run: ./.github/scripts/decrypt_secret.sh
       env:
-        DIGITALOCEAN_HOST: ${{secrets.DIGITALOCEAN_HOST}}
-      run: |
-        echo "$$DIGITALOCEAN_HOST"
+        DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
+        DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
+        DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
+    - name: Test printing your secret (Remove this step in production)
+      run: cat $HOME/secrets/dghost.json
+      run: cat $HOME/secrets/dgkey.json
+      run: cat $HOME/secrets/dguser.json
