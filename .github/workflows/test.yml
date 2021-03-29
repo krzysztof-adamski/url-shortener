@@ -15,6 +15,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run Tests
       run: |
-        import os; print(os.getenv('DIGITALOCEAN_HOST'))
+        echo "${{secrets.DIGITALOCEAN_HOST}}"
       env:
         DIGITALOCEAN_HOST: ${{secrets.DIGITALOCEAN_HOST}}
