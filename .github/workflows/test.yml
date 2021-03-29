@@ -43,16 +43,28 @@ jobs:
       #     to: krzysadam@gmail.com
       #     from: Luke Skywalker # <user@example.com>
       #     content_type: text/html
-      - name: Send email
-          uses: AlexisMateo/sendmail-action@v5
-          with:
-            smtp-server: smtp.gmail.com
-            smtp-server-port: 587
-            auth-user: testowanie12345k@gmail.com
-            auth-password: 12345!@#$%
-            subject: correciones a ${{github.repository}}
-            body: "AAAA"
-            from: "asasa@asa.pl"
-            to: "krzysadam@gmail.com"
-            is-tls: true
-            commit-message: true
+
+      # - name: Send email
+      #     uses: AlexisMateo/sendmail-action@v5
+      #     with:
+      #       smtp-server: smtp.gmail.com
+      #       smtp-server-port: 587
+      #       auth-user: testowanie12345k@gmail.com
+      #       auth-password: 12345!@#$%
+      #       subject: correciones a ${{github.repository}}
+      #       body: "AAAA"
+      #       from: "asasa@asa.pl"
+      #       to: "krzysadam@gmail.com"
+      #       is-tls: true
+      #       commit-message: true
+      - name: Send some mail
+        uses: wadeww/send-email-action@master
+        with:
+          server_address: smtp.gmail.com
+          port: 465
+          username: testowanie12345k@gmail.com
+          password: 12345!@#$%
+          subject: Workflow finished
+          body: Job completed ${{job.status}}
+          to: krzysadam@gmail.com
+          from: Me
