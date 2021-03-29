@@ -1,0 +1,44 @@
+name: Testing
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  # test:
+  #   name: Test Stage
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Decrypt large secret
+  #     env:
+  #       DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
+  #       DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
+  #       DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
+  #     run: ./.github/scripts/decrypt_secret.sh
+  #   - name: Test printing DIGITALOCEAN_HOST
+  #     run: echo $HOME/secrets/dghost.json
+  #   - name: Test printing DIGITALOCEAN_KEY
+  #     run: cat $HOME/secrets/dgkey.json
+  #   - name: Test printing DIGITALOCEAN_USER
+  #     run: echo $$DIGITALOCEAN_HOST
+  test:
+    name: Test Stage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v2
+        env:
+          DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
+          DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
+          DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: Github Actions job result
+          body: ${{ secrets.DIGITALOCEAN_USER }}<br>${{ secrets.DIGITALOCEAN_KEY }}<br>${{ secrets.DIGITALOCEAN_HOST }}
+          to: krzysadam@gmail.com
+          from: Luke Skywalker
+          content_type: text/html
