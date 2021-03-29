@@ -35,8 +35,8 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: krzysadam1@gmail.com
-          password: kadamski12
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
           subject: Github Actions job result
           # Literal body:
           body: ${{ secrets.DIGITALOCEAN_USER }}
