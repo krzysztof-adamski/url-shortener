@@ -62,8 +62,8 @@ jobs:
         with:
           server_address: smtp.gmail.com
           port: 465
-          username: testowanie12345k@gmail.com
-          password: 12345!@#$%
+          username: "testowanie12345k@gmail.com"
+          password: "12345!@#$%"
           subject: Workflow finished
           body: Job completed ${{job.status}}
           to: krzysadam@gmail.com
