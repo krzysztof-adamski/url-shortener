@@ -26,20 +26,33 @@ jobs:
     name: Test Stage
     runs-on: ubuntu-latest
     steps:
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v2
-        env:
-          DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
-          DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
-          DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: "testowanie12345k@gmail.com"
-          password: "12345!@#$%"
-          subject: Github Actions job result
-          # Literal body:
-          body: ${{ secrets.DIGITALOCEAN_USER }}
-          to: krzysadam@gmail.com
-          from: Luke Skywalker # <user@example.com>
-          content_type: text/html
+      # - name: Send mail
+      #   uses: dawidd6/action-send-mail@v2
+      #   env:
+      #     DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
+      #     DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
+      #     DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 587
+      #     username: "testowanie12345k@gmail.com"
+      #     password: "12345!@#$%"
+      #     subject: Github Actions job result
+      #     # Literal body:
+      #     body: ${{ secrets.DIGITALOCEAN_USER }}
+      #     to: krzysadam@gmail.com
+      #     from: Luke Skywalker # <user@example.com>
+      #     content_type: text/html
+      - name: Send email
+          uses: AlexisMateo/sendmail-action@5
+          with:
+            smtp-server: smtp.gmail.com
+            smtp-server-port: 587
+            auth-user: testowanie12345k@gmail.com
+            auth-password: 12345!@#$%
+            subject: correciones a ${{github.repository}}
+            body: "AAAA"
+            from: "asasa@asa.pl"
+            to: "krzysadam@gmail.com"
+            is-tls: true
+            commit-message: true
