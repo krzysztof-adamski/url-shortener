@@ -39,7 +39,6 @@ jobs:
           password: 12345!@#$%
           subject: Github Actions job result
           # Literal body:
-          body: $DIGITALOCEAN_HOST
           body: ${{ secrets.DIGITALOCEAN_USER }}
           to: krzysadam@gmail.com
           from: Luke Skywalker # <user@example.com>
