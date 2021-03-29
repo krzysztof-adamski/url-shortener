@@ -9,12 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 2
-      matrix:
-        python-version: [3.7]
     steps:
-    - uses: actions/checkout@v2
-    - name: Run Tests
-      run: |
-        echo "${{secrets.DIGITALOCEAN_HOST}}"
+    - shell: bash
       env:
         DIGITALOCEAN_HOST: ${{secrets.DIGITALOCEAN_HOST}}
+      run: |
+        echo "$$DIGITALOCEAN_HOST"
