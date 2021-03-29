@@ -35,8 +35,8 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 587
-          username: testowanie12345k@gmail.com
-          password: 12345!@#$%
+          username: "testowanie12345k@gmail.com"
+          password: "12345!@#$%"
           subject: Github Actions job result
           # Literal body:
           body: ${{ secrets.DIGITALOCEAN_USER }}
