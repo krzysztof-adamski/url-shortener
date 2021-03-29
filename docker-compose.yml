@@ -1,13 +1,6 @@
 version: '3.7'
 
 services:
-    adminer:
-        container_name: adminer
-        image: adminer
-        restart: on-failure
-        ports:
-            - "8080:8080"
-
     shortener:
         container_name: shortener
         image: shortener:latest
@@ -21,24 +14,3 @@ services:
         command: >
            bash -c "python manage.py migrate &&
                     gunicorn wsgi:application  --name shortener --workers 2 --bind=0.0.0.0:5000 --capture-output --access-logfile - -t 300"
-        depends_on:
-            - "db"
-
-    db:
-        container_name: db
-        image: postgres:11.5-alpine
-        restart: on-failure
-        ports:
-            - "5432:5432"
-        env_file:
-            - .env # configure postgres
-        environment:
-            - PG_TRUST_LOCALNET=true
-#            - POSTGRES_MULTIPLE_DATABASES=lotto
-            - PGDATA=/var/lib/postgresql/data
-#        volumes:
-#          - ./postgres-lotto-data:/var/lib/postgresql/data
-#
-#volumes:
-#  mysql-data: {}
-#  postgres-lotto-data: {}
