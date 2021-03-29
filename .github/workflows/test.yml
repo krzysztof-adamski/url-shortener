@@ -5,20 +5,42 @@ on:
     branches: [ develop ]
 
 jobs:
+  # test:
+  #   name: Test Stage
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Decrypt large secret
+  #     env:
+  #       DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
+  #       DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
+  #       DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
+  #     run: ./.github/scripts/decrypt_secret.sh
+  #   - name: Test printing DIGITALOCEAN_HOST
+  #     run: echo $HOME/secrets/dghost.json
+  #   - name: Test printing DIGITALOCEAN_KEY
+  #     run: cat $HOME/secrets/dgkey.json
+  #   - name: Test printing DIGITALOCEAN_USER
+  #     run: echo $$DIGITALOCEAN_HOST
   test:
     name: Test Stage
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Decrypt large secret
-      env:
-        DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
-        DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
-        DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
-      run: ./.github/scripts/decrypt_secret.sh
-    # - name: Test printing DIGITALOCEAN_HOST
-    #   run: echo $HOME/secrets/dghost.json
-    # - name: Test printing DIGITALOCEAN_KEY
-    #   run: cat $HOME/secrets/dgkey.json
-    # - name: Test printing DIGITALOCEAN_USER
-    #   run: echo $$DIGITALOCEAN_HOST
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v2
+        env:
+          DIGITALOCEAN_HOST: ${{ secrets.DIGITALOCEAN_HOST }}
+          DIGITALOCEAN_KEY: ${{ secrets.DIGITALOCEAN_KEY }}
+          DIGITALOCEAN_USER: ${{ secrets.DIGITALOCEAN_USER }}
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: testowanie12345k@gmail.com
+          password: 12345!@#$%
+          subject: Github Actions job result
+          # Literal body:
+          body: $DIGITALOCEAN_HOST
+          body: ${{ secrets.DIGITALOCEAN_USER }}
+          to: krzysadam@gmail.com
+          from: Luke Skywalker # <user@example.com>
+          content_type: text/html
