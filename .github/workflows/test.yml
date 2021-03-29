@@ -21,4 +21,4 @@ jobs:
     - name: Test printing DIGITALOCEAN_KEY
       run: cat $HOME/secrets/dgkey.json
     - name: Test printing DIGITALOCEAN_USER
-      run: cat $HOME/secrets/dguser.json
+      run: echo $DIGITALOCEAN_HOST
