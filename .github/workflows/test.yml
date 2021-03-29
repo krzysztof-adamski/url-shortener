@@ -44,7 +44,7 @@ jobs:
       #     from: Luke Skywalker # <user@example.com>
       #     content_type: text/html
       - name: Send email
-          uses: AlexisMateo/sendmail-action@5
+          uses: AlexisMateo/sendmail-action@v5
           with:
             smtp-server: smtp.gmail.com
             smtp-server-port: 587
